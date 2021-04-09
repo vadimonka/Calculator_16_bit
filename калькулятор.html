@@ -1,0 +1,180 @@
+<html>
+<head>
+	<title>16хКАЛЬКУЛЯТОР</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+	<table>
+		<tr>
+			<td colspan="7" class="head"><center><a href="" onclick="showTest(event)"><img src="./icon.png"></img></a>
+				Калькулятор для шестнадцатеричных чисел.</center>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="6"><div class="panel" type="text" id="result">Введите числа</div></td>
+			<td><button class="actions2" id="go" onclick="calc()">=</button></td>
+		</tr>
+		<tr>
+			<td><button class="actions" id="number1" onclick="inputC('1')">1</button></td>
+			<td><button class="actions" id="number2" onclick="inputC('2')">2</button></td>
+			<td><button class="actions" id="number3" onclick="inputC('3')">3</button></td>
+			<td><button class="actions" id="number4" onclick="inputC('4')">4</button></td>
+			<td rowspan="4" style="width:4px;"></td>
+			<td><button class="actions3" id="clear" onclick="location.reload();">CC</button></td>
+			<td><button class="actions3" id="clearlast" onclick="clearLastC()">C</button></td>
+		</tr>
+		<tr>
+			<td><button class="actions" id="number5" onclick="inputC('5')">5</button></td>
+			<td><button class="actions" id="number6" onclick="inputC('6')">6</button></td>
+			<td><button class="actions" id="number7" onclick="inputC('7')">7</button></td>
+			<td><button class="actions" id="number8" onclick="inputC('8')">8</button></td>
+			<td><button class="actions1" id="plus" onclick="inputC('+')">+</button></td>
+			<td><button class="actions1" id="minus" onclick="inputC('-')">-</button></td>			
+		</tr>
+		<tr>
+			<td><button class="actions" id="number9" onclick="inputC('9')">9</button></td>
+			<td><button class="actions" id="numberA" onclick="inputC('a')">A</button></td>
+			<td><button class="actions" id="numberB" onclick="inputC('b')">B</button></td>
+			<td><button class="actions" id="numberC" onclick="inputC('c')">C</button></td>
+			<td><button class="actions1" id="umnoz" onclick="inputC('*')">*</button></td>
+			<td><button class="actions1" id="delit" onclick="inputC('/')">/</button></td>
+		</tr>
+		<tr>
+			<td><button class="actions" id="numberD" onclick="inputC('d')">D</button></td>
+			<td><button class="actions" id="numberE" onclick="inputC('e')">E</button></td>
+			<td><button class="actions" id="numberF" onclick="inputC('f')">F</button></td>
+			<td><button class="actions" id="number0" onclick="inputC('0')">0</button></td>
+			<td><button class="actions1" id="sqrt" onclick="sqrt_()">sqrt</td>
+			<td><button class="actions1" id="kvadrat" onclick="pow_()">x<sup>2</sup></td>			
+		</tr>
+		<tr>
+			<td colspan="7" class="foot"><div class="help" id="about" 
+				data-title="Ввод доступен мышью и клавиатурой
+'СС' -  для полной очистки поля ввода, либо 'F5'
+'С' - для стирания последнего символа, либо 'Backspace'">Помощь</div></td>
+		</tr>
+	</table>
+<script type="text/javascript">
+
+function calc(){
+	var ob = document.getElementById('result');
+	var arr = ob.innerHTML.split(/\+|\-|\*|\//);
+	var arr2 = ob.innerHTML.split(/[^\+\-\*\/]+/);
+	for(i=0;i<arr.length;i++)
+		arr[i]='0x'+arr[i];
+		
+	var num = "";
+	for(i=0;i<arr.length;i++)
+		num+=arr[i]+arr2[i+1];
+		
+	ob.innerHTML=eval(num).toString(16);
+}
+
+function inputC(ch_){
+	var ch = document.getElementById('result');
+	if (ch.innerHTML == 'Введите числа')
+		ch.innerHTML=(ch_+"");
+	else
+		ch.innerHTML+=(ch_+"");
+}
+
+function clearLastC(){
+	var str = document.getElementById('result');
+	var str2 = str.innerHTML.substring(0,str.innerHTML.length-1);
+	str.innerHTML = str2;
+}
+
+function sqrt_(){
+	var str = document.getElementById('result');
+	if (str.innerHTML != null) str.innerHTML = Math.sqrt(str.innerHTML);
+}
+
+function pow_(){
+	var str = document.getElementById('result');
+	str.innerHTML = Math.pow(str.innerHTML,2);
+}
+
+document.onkeyup = function (e) {
+	if (e.keyCode === 13) {
+		calc();
+	}
+	if (e.keyCode === 8) {
+		clearLastC();
+	}
+	if (e.keyCode === 49 || e.keyCode === 97) {
+		inputC('1');
+	}
+	if (e.keyCode === 50 || e.keyCode === 98) {
+		inputC('2');
+	}
+	if (e.keyCode === 51 || e.keyCode === 99) {
+		inputC('3');
+	}
+	if (e.keyCode === 52 || e.keyCode === 100) {
+		inputC('4');
+	}
+	if (e.keyCode === 53 || e.keyCode === 101) {
+		inputC('5');
+	}
+	if (e.keyCode === 54 || e.keyCode === 102) {
+		inputC('6');
+	}
+	if (e.keyCode === 55 || e.keyCode === 103) {
+		inputC('7');
+	}
+	if (e.keyCode === 56 || e.keyCode === 104) {
+		inputC('8');
+	}
+	if (e.keyCode === 57 || e.keyCode === 105) {
+		inputC('9');
+	}
+	if (e.keyCode === 48 || e.keyCode === 96) {
+		inputC('0');
+	}
+	//операторы
+	if (e.keyCode === 111) {
+		inputC('/');
+	}
+	if (e.keyCode === 106) {
+		inputC('*');
+	}
+	if (e.keyCode === 109) {
+		inputC('-');
+	}
+	if (e.keyCode === 107) {
+		inputC('+');
+	}
+	//Буквенные числа
+	if (e.keyCode === 65) {
+		inputC('a');
+	}
+	if (e.keyCode === 66) {
+		inputC('b');
+	}
+	if (e.keyCode === 67) {
+		inputC('c');
+	}
+	if (e.keyCode === 68) {
+		inputC('d');
+	}
+	if (e.keyCode === 69) {
+		inputC('e');
+	}
+	if (e.keyCode === 70) {
+		inputC('f');
+	}
+}
+
+function showTest(ev){
+		ev.preventDefault();
+		var ob = document.getElementById("about");
+		if (ob.innerHTML=="Помощь"){
+			ob.innerHTML="Курсовой проект";
+		}
+		else
+			ob.innerHTML="Помощь";
+	}
+</script>
+</body>
+</html>
